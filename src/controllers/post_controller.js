@@ -58,7 +58,7 @@ export const deletePost = (req, res) => {
 
 export const updatePost = (req, res) => {
   // A.findOneAndUpdate(conditions, update)
-  console.log('req.params', req.body);
+  // console.log('req.params', req.body);
   const query = { _id: req.params.id };
   const update = req.body;
   Post.findOneAndUpdate(query, update)
