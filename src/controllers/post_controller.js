@@ -46,16 +46,29 @@ export const getPost = (req, res) => {
 export const deletePost = (req, res) => {
   Post.remove({ _id: req.params.id })
     .then((result) => {
-      console.log('success');
-      console.log(result);
+      // console.log('success');
+      // console.log(result);
       res.send(result);
     }).catch((error) => {
-      console.log('error');
-      console.log(error);
+      // console.log('error');
+      // console.log(error);
       res.status(500).json({ error });
     });
 };
 
 export const updatePost = (req, res) => {
-  res.send('update a post here');
+  // A.findOneAndUpdate(conditions, update)
+  console.log('req.params', req.body);
+  const query = { _id: req.params.id };
+  const update = req.body;
+  Post.findOneAndUpdate(query, update)
+    .then((result) => {
+      // console.log('success');
+      // console.log(result);
+      res.send(result);
+    }).catch((error) => {
+      // console.log('error');
+      // console.log(error);
+      res.status(500).json({ error });
+    });
 };
