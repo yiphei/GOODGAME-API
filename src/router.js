@@ -11,7 +11,6 @@ router.get('/', (req, res) => {
 // chaining method
 router.route('/posts/')
   .post((req, res) => {
-    // res.send('Get posts ');
     Posts.createPost(req, res);
   })
   .get((req, res) => {
@@ -21,15 +20,12 @@ router.route('/posts/')
 
 router.route('/posts/:id')
   .get((req, res) => {
-    // res.send('Get posts ');
     Posts.getPost(req, res);
   })
   .put((req, res) => {
-    // res.send('Get posts ');
     Posts.updatePost(req, res);
   })
   .delete((req, res) => {
-    // res.send('Get posts ');
     Posts.deletePost(req, res);
   });
 
