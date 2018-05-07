@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
   res.json({ message: 'welcome to our blog api!' });
 });
 
-// /your routes will go here
+// your routes will go here
 // chaining method
 router.route('/posts/')
   .post(Posts.createPost)
