@@ -10,23 +10,12 @@ router.get('/', (req, res) => {
 // /your routes will go here
 // chaining method
 router.route('/posts/')
-  .post((req, res) => {
-    Posts.createPost(req, res);
-  })
-  .get((req, res) => {
-    // res.send('Get posts ');
-    Posts.getPosts(req, res);
-  });
+  .post(Posts.createPost)
+  .get(Posts.getPosts);
 
 router.route('/posts/:id')
-  .get((req, res) => {
-    Posts.getPost(req, res);
-  })
-  .put((req, res) => {
-    Posts.updatePost(req, res);
-  })
-  .delete((req, res) => {
-    Posts.deletePost(req, res);
-  });
+  .get(Posts.getPost)
+  .put(Posts.updatePost)
+  .delete(Posts.deletePost);
 
 export default router;

@@ -11,7 +11,7 @@ export const createPost = (req, res) => {
   post.save()
     .then((result) => {
       res.json({ message: 'Post created!' });
-      console.log(post);
+      // console.log(post);
     })
     .catch((error) => {
       res.status(500).json({ error });
@@ -19,14 +19,43 @@ export const createPost = (req, res) => {
 };
 
 export const getPosts = (req, res) => {
-  res.send('posts should be returned');
+  Post.find()
+    .then((result) => {
+      res.send(result);
+    }).catch((error) => {
+      res.status(500).json({ error });
+    });
 };
+
+// http://mongoosejs.com/docs/api.html#findbyid_findById
 export const getPost = (req, res) => {
-  res.send('single post looked up');
+//   Post.findById(req.params.id, (err, post) => {
+//     console.log(post);
+//     if (err) {
+//       res.status(500).json({ err });
+//     } else {
+//       res.send(post);
+//     }
+//   });
+// };
+  console.log(req.params.id);
+  Post.findById(req.params.id)
+    .then((result) => {
+      console.log('success');
+      console.log(result);
+      res.send(result);
+    }).catch((error) => {
+      console.log('error');
+      console.log(error);
+      res.status(500).json({ error });
+    });
 };
+
+
 export const deletePost = (req, res) => {
   res.send('delete a post here');
 };
+
 export const updatePost = (req, res) => {
   res.send('update a post here');
 };
