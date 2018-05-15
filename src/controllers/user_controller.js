@@ -32,9 +32,6 @@ export const signup = (req, res, next) => {
   const query = { email };
   User.findOne(query)
     .then((result) => {
-      // console.log('success');
-      // console.log(result);
-
       // check if user exists
       console.log('signup result ', result);
       if (result !== null) {

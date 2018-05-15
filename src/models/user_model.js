@@ -14,10 +14,6 @@ UserSchema.set('toJSON', {
   virtuals: true,
 });
 
-// Saving Salt+Hash
-// create UserModel class from schema
-const UserModel = mongoose.model('User', UserSchema);
-
 // mongoose pre save hook for saving password
 // define function that is called when User object is saved
 // function takes the plain text password and generates a salt+hash password
@@ -55,10 +51,19 @@ UserSchema.pre('save', function beforeUserSave(next) {
 //  note use of named function rather than arrow notation
 //  this arrow notation is lexically scoped and prevents binding scope, which mongoose relies on
 UserSchema.methods.comparePassword = function comparePassword(candidatePassword, callback) {
-
-  // return callback(null, comparisonResult) for success
-  // or callback(error) in the error case
-
+  console.log('in comparePassword');
+  // is this the right way to get the hash? this.password
+  bcryptjs.compare(candidatePassword, this.password) // this.password is the hash
+    .then((res) => { // success
+      return callback(null, res);
+    }).catch((error) => {
+      callback(error);
+    });
 };
+
+// Saving Salt+Hash
+// create UserModel class from schema
+// needs to go after the schema otherwise comparepassword will not be saved as part of user model??
+const UserModel = mongoose.model('User', UserSchema);
 
 export default UserModel;
