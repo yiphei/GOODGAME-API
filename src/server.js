@@ -46,7 +46,8 @@ app.get('/', (req, res) => {
 
 // START THE SERVER
 // =============================================================================
-const port = process.env.PORT || 9090;
+// const port = process.env.PORT || 9090;
+const port = 9090; // to do post testing
 app.listen(port);
 
 console.log(`listening on: ${port}`);
