@@ -3,11 +3,8 @@ import passport from 'passport';
 import LocalStrategy from 'passport-local';
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
 import dotenv from 'dotenv';
-
+import User from '../models/user_model'; // and import User
 /* eslint-disable consistent-return */
-
-// and import User
-import User from '../models/user_model';
 
 dotenv.config({ silent: true });
 
