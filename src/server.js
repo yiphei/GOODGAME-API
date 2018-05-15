@@ -46,8 +46,7 @@ app.get('/', (req, res) => {
 
 // START THE SERVER
 // =============================================================================
-const port = process.env.PORT || 9090; // actual
-// const port = 9090; // to do local curl testing
+const port = process.env.PORT || 9090;
 app.listen(port);
 
 console.log(`listening on: ${port}`);
