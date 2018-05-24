@@ -31,11 +31,19 @@ router.route('/posts/:id')
   .put(requireAuth, Posts.updatePost)
   .delete(requireAuth, Posts.deletePost);
 
-  router.route('/courts/')
-    .get(Courts.createCourt)
-    .post(Courts.getCourts)
+// for going to a user profile
+router.route('/users/:id')
+  .get(Posts.getPost);
 
-  router.route('/courts/:id')
-    .get(Courts.getCourt)
+// for ranking
+// router.route('/users/')
+//     .get(Posts.getPost)
+
+router.route('/courts/')
+  .get(Courts.createCourt)
+  .post(Courts.getCourts)
+
+router.route('/courts/:id')
+  .get(Courts.getCourt)
 
 export default router;
