@@ -6,7 +6,7 @@ const CourtSchema = new Schema({
   title: String,
   lat: Number,
   long: Number,
-  game_list: [{ type: Schema.Types.ObjectId, ref: 'Post' }], // players_list: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+  game_list: [{ type: Schema.Types.ObjectId, ref: 'Court' }], // players_list: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 });
 
 // create PostModel class from schema
