@@ -18,7 +18,7 @@ export const createCourt = (req, res) => {
 };
 
 export const getCourts = (req, res) => {
-  Post.find()
+  Court.find()
     .then((result) => {
       res.send(result);
     }).catch((error) => {

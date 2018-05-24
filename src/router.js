@@ -41,9 +41,9 @@ router.route('/users/:id')
 
 router.route('/courts/')
   .get(Courts.createCourt)
-  .post(Courts.getCourts)
+  .post(Courts.getCourts);
 
 router.route('/courts/:id')
-  .get(Courts.getCourt)
+  .get(Courts.getCourt);
 
 export default router;
