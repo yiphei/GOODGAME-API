@@ -74,10 +74,10 @@ export const updatePost = (req, res) => {
 
   // if user is in players_list, ignore
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes#Browser_compatibility
-  if (req.body.players_list.includes(req.body.user)) {
+  if (req.body.players_list.includes(req.user)) {
     return res.status(500).send('User is already in this game');
   } else {
-    req.body.players_list.push(req.body.user); // add player to player_list
+    req.body.players_list.push(req.user); // add player to player_list
     const update = req.body;
     // if user not in players_list, add player to the list
     Post.findOneAndUpdate(query, update)
