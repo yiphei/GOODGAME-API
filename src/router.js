@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import * as Posts from './controllers/post_controller';
 import * as UserController from './controllers/user_controller';
+import * as Courts from './controllers/court_controller';
 import { requireAuth, requireSignin } from './services/passport';
 
 const router = Router();
@@ -29,5 +30,20 @@ router.route('/posts/:id')
   .get(Posts.getPost)
   .put(requireAuth, Posts.updatePost)
   .delete(requireAuth, Posts.deletePost);
+
+// for going to a user profile
+router.route('/users/:id')
+  .get(Posts.getPost);
+
+// for ranking
+// router.route('/users/')
+//     .get(Posts.getPost)
+
+router.route('/courts/')
+  .get(Courts.getCourts)
+  .post(Courts.createCourt);
+
+router.route('/courts/:id')
+  .get(Courts.getCourt);
 
 export default router;

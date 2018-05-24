@@ -6,7 +6,8 @@ import bcryptjs from 'bcryptjs'; // for salt + hash
 const UserSchema = new Schema({
   email: { type: String, unique: true, lowercase: true },
   password: { type: String },
-  handle: { type: String },
+  handle: { type: String }, //   handle: { type: String, unique: true, lowercase: true },
+  // games and status
 });
 
 // provides a mapping to id from _id,
