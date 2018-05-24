@@ -109,7 +109,8 @@ function tokenForUser(user) {
 export const getUser = (req, res) => {
   // console.log(req.params.id);
   console.log('in API getUser');
-  User.findById(req.user.id)
+  console.log(req.user);
+  User.findById(req.user._id)
     .then((result) => {
       console.log('getUser success');
       // console.log('success');
