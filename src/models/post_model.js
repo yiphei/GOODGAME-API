@@ -12,7 +12,7 @@ const PostSchema = new Schema({
   max_players: Number,
   level: Number,
   players_list: [{ type: Schema.Types.ObjectId, ref: 'User' }], // players_list: [{ type: String }],
-  creator: { type: Schema.Types.ObjectId, ref: 'User' },
+  author: { type: Schema.Types.ObjectId, ref: 'User' },
 });
 
 // create PostModel class from schema
