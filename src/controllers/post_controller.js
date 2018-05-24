@@ -50,7 +50,6 @@ export const getPost = (req, res) => {
     });
 };
 
-
 export const deletePost = (req, res) => {
   Post.remove({ _id: req.params.id })
     .then((result) => {
