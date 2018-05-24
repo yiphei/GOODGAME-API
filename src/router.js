@@ -32,8 +32,8 @@ router.route('/posts/:id')
   .delete(requireAuth, Posts.deletePost);
 
   router.route('/courts/')
-    .get(Courts.createCourt)
-    .post(Courts.getCourts)
+    .get(Courts.getCourt)
+    .post(Courts.createCourts)
 
   router.route('/courts/:id')
     .get(Courts.getCourt)
