@@ -39,7 +39,7 @@ router.route('/posts/:id')
 // for going to a user profile
 router.route('/user/')
   // .put(UserController.updateUserGames) // requireAuth
-  .get(UserController.getUser);
+  .get(requireAuth, UserController.getUser);
 // update game list
 // get user games
 
