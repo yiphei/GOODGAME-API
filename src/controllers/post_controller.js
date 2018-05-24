@@ -12,7 +12,7 @@ export const createPost = (req, res) => {
   post.players_needed = req.body.players_needed;
   post.max_players = req.body.max_players;
   post.level = req.body.level; // this may change - level of creator
-  post.players_list = [req.user]; // req.user._id creator
+  post.players_list = new Array(req.user); // [req.user]; // req.user._id creator
   post.author = req.user; // req.user._id creator
   console.log('req.user ', req.user);
   console.log('req.body.user ', req.body.user);
