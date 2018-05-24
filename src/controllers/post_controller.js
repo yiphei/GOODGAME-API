@@ -3,11 +3,16 @@ import Post from '../models/post_model';
 
 export const createPost = (req, res) => {
   const post = new Post();
-  post.title = req.body.title;
-  post.tags = req.body.tags;
-  post.content = req.body.content;
-  post.cover_url = req.body.cover_url;
-  post.author = req.user.handle;
+  post.date = req.body.date;
+  post.time = req.body.time;
+  post.duration = req.body.duration;
+  post.lat = req.body.lat;
+  post.long = req.body.long;
+  post.players_needed = req.body.players_needed;
+  post.max_players = req.body.max_players;
+  post.level = req.body.level; // this may change - level of creator
+  post.players_list = [req.user._id]; // creator
+  post.author = req.user._id; // creator
   console.log('req.user ', req.user);
   console.log('req.body.user ', req.body.user);
   // console.log('createPost', req.body.title, ' ', req.body.tags, ' ', req.body.content, ' ', req.body.cover_url, '\n');

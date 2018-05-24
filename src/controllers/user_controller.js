@@ -39,6 +39,8 @@ export const signup = (req, res, next) => {
         // user exists
         return res.status(500).send('User with this email already exists');
       } else {
+        // now check if the handle is unique. if not, return error;
+
         // user does not exist: create new user
         const user = new User();
         user.email = email;

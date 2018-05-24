@@ -30,7 +30,9 @@ app.use(bodyParser.json());
 
 
 // DB Setup ------------------------
+// const mongoURI = 'mongodb://localhost/blog';
 const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost/blog';
+
 mongoose.connect(mongoURI);
 // set mongoose promises to es6 default
 mongoose.Promise = global.Promise;
@@ -48,6 +50,7 @@ app.get('/', (req, res) => {
 // START THE SERVER
 // =============================================================================
 const port = process.env.PORT || 9090;
+// const port = 9090;
 app.listen(port);
 
 console.log(`listening on: ${port}`);
