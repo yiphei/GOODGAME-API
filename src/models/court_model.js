@@ -2,7 +2,6 @@ import mongoose, { Schema } from 'mongoose';
 
 // create a PostSchema with a title field
 const CourtSchema = new Schema({
-  // datetime: { type: Date, default: Date.now }, // date and time
   title: String,
   lat: Number,
   long: Number,

@@ -12,6 +12,7 @@ const PostSchema = new Schema({
   max_players: Number,
   level: Number,
   players_list: [{ type: Schema.Types.ObjectId, ref: 'User' }], // players_list: [{ type: String }],
+  postGameEvaluation: [],
   author: { type: Schema.Types.ObjectId, ref: 'User' },
 });
 

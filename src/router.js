@@ -33,15 +33,15 @@ router.route('/posts/:id')
 
 // for going to a user profile
 router.route('/users/:id')
-  .get(Posts.getPost)
+  .get(Posts.getPost);
 
 // for ranking
 // router.route('/users/')
 //     .get(Posts.getPost)
 
 router.route('/courts/')
-  .get(Courts.getCourt)
-  .post(Courts.createCourts)
+  .get(Courts.getCourts)
+  .post(Courts.createCourt);
 
 router.route('/courts/:id')
   .get(Courts.getCourt);
