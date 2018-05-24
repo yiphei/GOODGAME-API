@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import * as Posts from './controllers/post_controller';
 import * as UserController from './controllers/user_controller';
+import * as Courts from './controllers/court_controller';
 import { requireAuth, requireSignin } from './services/passport';
 
 const router = Router();
@@ -38,5 +39,11 @@ router.route('/users/:id')
 // router.route('/users/')
 //     .get(Posts.getPost)
 
+router.route('/courts/')
+  .get(Courts.createCourt)
+  .post(Courts.getCourts)
+
+router.route('/courts/:id')
+  .get(Courts.getCourt)
 
 export default router;
