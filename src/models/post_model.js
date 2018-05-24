@@ -11,7 +11,7 @@ const PostSchema = new Schema({
   players_needed: Number,
   max_players: Number,
   level: Number,
-  players_list: [{ type: String }], // players_list: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+  players_list: [{ type: Schema.Types.ObjectId, ref: 'User' }], // players_list: [{ type: String }],
   creator: { type: Schema.Types.ObjectId, ref: 'User' },
 });
 

@@ -30,4 +30,13 @@ router.route('/posts/:id')
   .put(requireAuth, Posts.updatePost)
   .delete(requireAuth, Posts.deletePost);
 
+// for going to a user profile
+router.route('/users/:id')
+  .get(Posts.getPost);
+
+// for ranking
+// router.route('/users/')
+//     .get(Posts.getPost)
+
+
 export default router;
