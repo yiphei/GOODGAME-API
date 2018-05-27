@@ -20,6 +20,11 @@ router.get('/', (req, res) => {
   res.json({ message: 'welcome to our blog api!' });
 });
 
+// // a player's joined games
+// router.route('/yourgames/')
+//   .get(requireAuth, UserController.getUserGames)
+//   .put(requireAuth, UserController.updateUserGames); // update a player's posts
+
 // your routes will go here
 // chaining method
 router.route('/posts/')
@@ -32,8 +37,11 @@ router.route('/posts/:id')
   .delete(requireAuth, Posts.deletePost);
 
 // for going to a user profile
-router.route('/users/:id')
-  .get(Posts.getPost);
+router.route('/user/')
+  // .put(UserController.updateUserGames) // requireAuth
+  .get(requireAuth, UserController.getUser);
+// update game list
+// get user games
 
 // for ranking
 // router.route('/users/')

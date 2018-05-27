@@ -7,8 +7,7 @@ export const createPost = (req, res) => {
   post.date = req.body.date;
   post.time = req.body.time;
   post.duration = req.body.duration;
-  post.lat = req.body.lat;
-  post.long = req.body.long;
+  post.location = req.body.location;
   post.players_needed = req.body.players_needed;
   post.max_players = req.body.max_players;
   post.level = req.body.level; // this may change - level of creator
@@ -39,7 +38,7 @@ export const getPosts = (req, res) => {
 // http://mongoosejs.com/docs/api.html#findbyid_findById
 export const getPost = (req, res) => {
   // console.log(req.params.id);
-  Post.findById(req.params.id)
+  Post.findById(req.params.id).populate('author', 'player_list')
     .then((result) => {
       // console.log('success');
       // console.log(result);
