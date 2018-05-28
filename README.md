@@ -1,7 +1,8 @@
-# Lab5 part 1 
+# Lab5 part 1
+
 
 ## Description
-This is a express.js and mongoDB CRUD API server for a simple blog. A blog post has a title, content, tags, and a cover_url (an image or gif). Using this api you can retrieve all posts, retreive a single post, create a post, update a post, and delete a post. It returns JSON. 
+This is a express.js and mongoDB CRUD API server for a simple blog. A blog post has a title, content, tags, and a cover_url (an image or gif). Using this api you can retrieve all posts, retreive a single post, create a post, update a post, and delete a post. It returns JSON.
 
 The API has the following endpoints:
 
@@ -18,5 +19,3 @@ The API has the following endpoints:
 * airbnb eslint rules
 
 Procfile set up to run on [heroku](https://devcenter.heroku.com/articles/getting-started-with-nodejs#deploy-the-app)
-
-

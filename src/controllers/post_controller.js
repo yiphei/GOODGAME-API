@@ -2,6 +2,7 @@
 import Post from '../models/post_model';
 /* eslint-disable consistent-return */
 
+
 export const createPost = (req, res) => {
   const post = new Post();
   post.date = req.body.date;
@@ -27,8 +28,10 @@ export const createPost = (req, res) => {
 };
 
 export const getPosts = (req, res) => {
+  console.log('IN get POsts');
   Post.find()
     .then((result) => {
+      console.log('Found posts');
       res.send(result);
     }).catch((error) => {
       res.status(500).json({ error });
@@ -72,11 +75,12 @@ export const updatePost = (req, res) => {
   // const update = req.body;
 
   // if user is in players_list, ignore
-  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes#Browser_compatibility
-  if (req.body.players_list.includes(req.user)) {
+  // https://stackoverflow.com/questions/2430000/determine-if-string-is-in-list-in-javascript
+
+  if (req.body.players_list.indexOf(req.user.id) >= 0) {
     return res.status(500).send('User is already in this game');
   } else {
-    console.log('In UpdatePost, Player not in the game');
+    console.log(' Player not in the game');
     req.body.players_list.push(req.user); // add player to player_list
     const update = req.body;
     // if user not in players_list, add player to the list

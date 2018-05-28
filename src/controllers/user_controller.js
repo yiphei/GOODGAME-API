@@ -122,3 +122,36 @@ export const getUser = (req, res) => {
       res.status(500).json({ error });
     });
 };
+
+
+export const addGame = (req, res) => {
+  // A.findOneAndUpdate(conditions, update)
+  // console.log('req.params', req.body);
+  const query = { _id: req.user._id };
+  console.log('In AddGame API');
+  console.log(req.user);
+  console.log(req.body);
+
+
+  if (req.user.games.indexOf(req.body.id) >= 0) {
+    return res.status(500).send('User has already this game');
+  } else {
+    console.log(' User not in game');
+
+    // const update = req.user;
+    req.user.games.push(req.body);
+
+    // Object.assign({}, req.user, update);
+
+    User.findOneAndUpdate(query, req.user)
+      .then((result) => {
+        console.log('success');
+        console.log(result);
+        res.send(result);
+      }).catch((error) => {
+        console.log('Add game to user not successful');
+        console.log(error);
+        res.status(500).json({ error });
+      });
+  }
+};
