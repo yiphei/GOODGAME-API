@@ -105,7 +105,7 @@ export const updatePostGameEvaluation = (req, res) => {
   // A.findOneAndUpdate(conditions, update)
   console.log('req.params', req.body);
 
-  Post.findOne({ postGameEvaluation: { $elemMatch: { playerId: 'player 2' } } }, (err, gameEval) => {
+  Post.findOne({ postGameEvaluation: { $elemMatch: { playerId: req.user._id } } }, (err, gameEval) => {
     if (err) {
       console.log('Error');
       res.status(500).json({ err });
