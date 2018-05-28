@@ -76,6 +76,7 @@ export const updatePost = (req, res) => {
   if (req.body.players_list.includes(req.user)) {
     return res.status(500).send('User is already in this game');
   } else {
+    console.log('In UpdatePost, Player not in the game');
     req.body.players_list.push(req.user); // add player to player_list
     const update = req.body;
     // if user not in players_list, add player to the list
