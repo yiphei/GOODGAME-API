@@ -38,8 +38,10 @@ router.route('/posts/:id')
 
 // for going to a user profile
 router.route('/user/')
-  // .put(UserController.updateUserGames) // requireAuth
   .get(requireAuth, UserController.getUser);
+
+router.route('/user/')
+  .put(requireAuth, UserController.addGame);
 // update game list
 // get user games
 
