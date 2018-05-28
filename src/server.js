@@ -30,7 +30,7 @@ app.use(bodyParser.json());
 
 
 // DB Setup ------------------------
-// const mongoURI = 'mongodb://localhost/blog';
+// const mongoURI = 'mongodb://localhost/goodgame';
 const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost/blog';
 
 mongoose.connect(mongoURI);
