@@ -103,9 +103,9 @@ export const updatePost = (req, res) => {
 
 export const updatePostGameEvaluation = (req, res) => {
   // A.findOneAndUpdate(conditions, update)
-  // console.log('req.params', req.body);
+  console.log('req.params', req.body);
 
-  Post.findOne({ postGameEvaluation: { $elemMatch: { playerId: req.user._id } } }, (err, gameEval) => {
+  Post.findOne({ postGameEvaluation: { $elemMatch: { playerId: 'player 2' } } }, (err, gameEval) => {
     if (err) {
       console.log('Error');
       res.status(500).json({ err });
@@ -116,21 +116,29 @@ export const updatePostGameEvaluation = (req, res) => {
       return res.status(500).send('This player has already completed their postGameEvaluation');
     } else {
       console.log('Player evaluation not found :GOOD');
+      console.log('req.params.id', req.params.id);
 
-      const query = { _id: req.params.id };
+      Post.findById(req.params.id)
+        .then((post) => {
+          console.log('post game:', post);
+          console.log('user id:', req.user._id);
+          post.postGameEvaluation.push(req.body.postGameEvaluation); // add player to player_list
+          // post.players_status.push({ playerId: req.user._id, status: 'Evaluted' });
 
-      req.body.players_status.push({ playerId: req.user._id, status: 'Evaluated' }); // add player status
-      req.body.postGameEvaluation.push(req.body.postGameEvaluation); // add player to player_list
-      const update = req.body;
-      // if user not in players_list, add player to the list
-      Post.findOneAndUpdate(query, update)
-        .then((result) => {
-          console.log('success: udated postGameEvaluation');
-          // console.log(result);
-          res.send(result);
-        }).catch((error) => {
+          // Post.update({ 'players_status.playerId': req.user._id }, { $set: { 'players_status.$.status': 'Evaluted' } });
+
+
+          post.save()
+            .then((result) => {
+              console.log('success: udated postGameEvaluation');
+              res.json({ message: 'Post updated!' });
+            })
+            .catch((error) => {
+              res.status(500).json({ error });
+            });
+        })
+        .catch((error) => {
           console.log('Error: failed to update postGameEvaluation');
-          // console.log(error);
           res.status(500).json({ error });
         });
     }
