@@ -19,7 +19,6 @@ export const signin = (req, res, next) => {
 // verify the user doesn't exist in the system already aka check their email address
 // if they dont exist, create a new User object and save it
 export const signup = (req, res, next) => {
-  console.log('IN API SIGNUP');
   const email = req.body.email;
   const password = req.body.password;
   const handle = req.body.handle;
@@ -47,8 +46,7 @@ export const signup = (req, res, next) => {
         user.email = email;
         user.password = password;
         user.handle = handle;
-        user.score = 0;
-        console.log('saving user...');
+        user.games = [];
 
         // Save the new User object
         user.save()
@@ -77,13 +75,44 @@ function tokenForUser(user) {
   return jwt.encode({ sub: user.id, iat: timestamp }, process.env.AUTH_SECRET);
 }
 
+// // update player's list of games
+// export const updateUserGames = (req, res) => {
+//   // A.findOneAndUpdate(conditions, update)
+//   // console.log('req.params', req.body);
+//   const query = { _id: req.params.id }; // game id
+//   // const update = req.body;
+//
+//   // if game is in games list, ignore
+//   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes#Browser_compatibility
+//   if (req.user.games.includes(req.params.id)) {
+//     return res.status(500).send('User is already in this game');
+//   } else {
+//     // if user not in players_list, add player to the list
+//     req.body.games.push(req.params.id); // add game to games list
+//     const update = req.body;
+//
+//     User.findOneAndUpdate(query, update)
+//       .then((result) => {
+//         // console.log('success');
+//         // console.log(result);
+//         res.send(result);
+//       }).catch((error) => {
+//         // console.log('error');
+//         // console.log(error);
+//         res.status(500).json({ error });
+//       });
+//   }
+// };
 
-export const getUser = (req, res, next) => {
+
+// http://mongoosejs.com/docs/api.html#findbyid_findById
+export const getUser = (req, res) => {
   // console.log(req.params.id);
-  console.log('In GetUser');
+  console.log('in API getUser');
   console.log(req.user);
-  User.findById(req.user.id)
+  User.findById(req.user._id)
     .then((result) => {
+      console.log('getUser success');
       // console.log('success');
       // console.log(result);
       res.send(result);

@@ -7,8 +7,7 @@ export const createPost = (req, res) => {
   post.date = req.body.date;
   post.time = req.body.time;
   post.duration = req.body.duration;
-  post.lat = req.body.lat;
-  post.long = req.body.long;
+  post.location = req.body.location;
   post.players_needed = req.body.players_needed;
   post.max_players = req.body.max_players;
   post.level = req.body.level; // this may change - level of creator
@@ -41,12 +40,13 @@ export const getPosts = (req, res) => {
 // http://mongoosejs.com/docs/api.html#findbyid_findById
 export const getPost = (req, res) => {
   // console.log(req.params.id);
-  Post.findById(req.params.id)
+  Post.findById(req.params.id).populate('author').populate('players_list')
     .then((result) => {
       // console.log('success');
       // console.log(result);
       res.send(result);
-    }).catch((error) => {
+    })
+    .catch((error) => {
       // console.log('error');
       // console.log(error);
       res.status(500).json({ error });
@@ -78,6 +78,7 @@ export const updatePost = (req, res) => {
   if (req.body.players_list.includes(req.user)) {
     return res.status(500).send('User is already in this game');
   } else {
+    console.log('In UpdatePost, Player not in the game');
     req.body.players_list.push(req.user); // add player to player_list
     const update = req.body;
     // if user not in players_list, add player to the list
