@@ -14,6 +14,9 @@ export const createPost = (req, res) => {
   post.level = req.body.level; // this may change - level of creator
   post.players_list = new Array(req.user); // [req.user]; // req.user._id creator
   post.author = req.user; // req.user._id creator
+
+  post.players_status = new Array({ playerId: req.user._id, status: 'Joined' });
+
   console.log('req.user ', req.user);
   console.log('req.body.user ', req.body.user);
   // console.log('createPost', req.body.title, ' ', req.body.tags, ' ', req.body.content, ' ', req.body.cover_url, '\n');
@@ -95,4 +98,41 @@ export const updatePost = (req, res) => {
         res.status(500).json({ error });
       });
   }
+};
+
+
+export const updatePostGameEvaluation = (req, res) => {
+  // A.findOneAndUpdate(conditions, update)
+  // console.log('req.params', req.body);
+
+  Post.findOne({ postGameEvaluation: { $elemMatch: { playerId: req.user._id } } }, (err, gameEval) => {
+    if (err) {
+      console.log('Error');
+      res.status(500).json({ err });
+    }
+
+    if (gameEval) {
+      console.log('This player has already completed their postGameEvaluation');
+      return res.status(500).send('This player has already completed their postGameEvaluation');
+    } else {
+      console.log('Player evaluation not found :GOOD');
+
+      const query = { _id: req.params.id };
+
+      req.body.players_status.push({ playerId: req.user._id, status: 'Evaluated' }); // add player status
+      req.body.postGameEvaluation.push(req.body.postGameEvaluation); // add player to player_list
+      const update = req.body;
+      // if user not in players_list, add player to the list
+      Post.findOneAndUpdate(query, update)
+        .then((result) => {
+          console.log('success: udated postGameEvaluation');
+          // console.log(result);
+          res.send(result);
+        }).catch((error) => {
+          console.log('Error: failed to update postGameEvaluation');
+          // console.log(error);
+          res.status(500).json({ error });
+        });
+    }
+  });
 };

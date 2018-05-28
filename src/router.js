@@ -34,6 +34,7 @@ router.route('/posts/')
 router.route('/posts/:id')
   .get(Posts.getPost)
   .put(requireAuth, Posts.updatePost)
+  .put(requireAuth, Posts.updatePostGameEvaluation)
   .delete(requireAuth, Posts.deletePost);
 
 // for going to a user profile
