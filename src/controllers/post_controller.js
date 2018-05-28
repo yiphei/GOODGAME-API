@@ -2,6 +2,7 @@
 import Post from '../models/post_model';
 /* eslint-disable consistent-return */
 
+
 export const createPost = (req, res) => {
   const post = new Post();
   post.date = req.body.date;
