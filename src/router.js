@@ -37,6 +37,9 @@ router.route('/posts/:id')
   .put(requireAuth, Posts.updatePostGameEvaluation)
   .delete(requireAuth, Posts.deletePost);
 
+router.route('/postss/:id')
+  .put(requireAuth, Posts.updatePostGameEvaluation);
+
 // for going to a user profile
 router.route('/user/')
   .get(requireAuth, UserController.getUser);
