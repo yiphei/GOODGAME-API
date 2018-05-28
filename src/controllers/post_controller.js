@@ -38,12 +38,13 @@ export const getPosts = (req, res) => {
 // http://mongoosejs.com/docs/api.html#findbyid_findById
 export const getPost = (req, res) => {
   // console.log(req.params.id);
-  Post.findById(req.params.id).populate('author', 'player_list')
+  Post.findById(req.params.id).populate('author').populate('players_list')
     .then((result) => {
       // console.log('success');
       // console.log(result);
       res.send(result);
-    }).catch((error) => {
+    })
+    .catch((error) => {
       // console.log('error');
       // console.log(error);
       res.status(500).json({ error });
