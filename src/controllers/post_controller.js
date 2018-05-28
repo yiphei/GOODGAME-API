@@ -28,8 +28,10 @@ export const createPost = (req, res) => {
 };
 
 export const getPosts = (req, res) => {
+  console.log('IN get POsts');
   Post.find()
     .then((result) => {
+      console.log('Found posts');
       res.send(result);
     }).catch((error) => {
       res.status(500).json({ error });

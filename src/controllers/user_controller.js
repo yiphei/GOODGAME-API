@@ -19,6 +19,7 @@ export const signin = (req, res, next) => {
 // verify the user doesn't exist in the system already aka check their email address
 // if they dont exist, create a new User object and save it
 export const signup = (req, res, next) => {
+  console.log('IN API SIGNUP');
   const email = req.body.email;
   const password = req.body.password;
   const handle = req.body.handle;
@@ -46,6 +47,8 @@ export const signup = (req, res, next) => {
         user.email = email;
         user.password = password;
         user.handle = handle;
+        user.score = 0;
+        console.log('saving user...');
 
         // Save the new User object
         user.save()
@@ -73,3 +76,20 @@ function tokenForUser(user) {
   const timestamp = new Date().getTime();
   return jwt.encode({ sub: user.id, iat: timestamp }, process.env.AUTH_SECRET);
 }
+
+
+export const getUser = (req, res, next) => {
+  // console.log(req.params.id);
+  console.log('In GetUser');
+  console.log(req.user);
+  User.findById(req.user.id)
+    .then((result) => {
+      // console.log('success');
+      // console.log(result);
+      res.send(result);
+    }).catch((error) => {
+      // console.log('error');
+      // console.log(error);
+      res.status(500).json({ error });
+    });
+};

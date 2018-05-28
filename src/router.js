@@ -32,8 +32,8 @@ router.route('/posts/:id')
   .delete(requireAuth, Posts.deletePost);
 
 // for going to a user profile
-router.route('/users/:id')
-  .get(Posts.getPost);
+router.route('/user')
+  .get(UserController.getUser);
 
 // for ranking
 // router.route('/users/')

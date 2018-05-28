@@ -7,6 +7,7 @@ const UserSchema = new Schema({
   email: { type: String, unique: true, lowercase: true },
   password: { type: String },
   handle: { type: String }, //   handle: { type: String, unique: true, lowercase: true },
+  score: Number,
   // games and status
 });
 
