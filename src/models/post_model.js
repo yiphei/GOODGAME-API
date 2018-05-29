@@ -6,7 +6,7 @@ const PostSchema = new Schema({
   date: String,
   time: String,
   duration: Number, // minutes
-  location: [{ type: Schema.Types.ObjectId, ref: 'Court' }],
+  location: { type: Schema.Types.ObjectId, ref: 'Court' },
   players_needed: Number,
   max_players: Number,
   level: Number,
