@@ -72,16 +72,31 @@ export const deletePost = (req, res) => {
 
 // Join game
 export const updatePost = (req, res) => {
-  // A.findOneAndUpdate(conditions, update)
-  // console.log('req.params', req.body);
   const query = { _id: req.params.id };
-  // const update = req.body;
+  console.log('IN UPDATEPOST API');
+  console.log(req.body);
+  console.log(req.user);
 
   // if user is in players_list, ignore
   // https://stackoverflow.com/questions/2430000/determine-if-string-is-in-list-in-javascript
-
-  if (req.body.players_list.indexOf(req.user.id) >= 0) {
-    return res.status(500).send('User is already in this game');
+  if (req.body.players_list.filter((e) => { return e.id == req.user._id; }).length > 0) {
+    console.log('User is already in this game');
+    const index = req.body.players_list.findIndex((p) => { return p.id == req.user._id; });
+    if (index > -1) {
+      req.body.players_list.splice(index, 1);
+      const update = req.body;
+      Post.findOneAndUpdate(query, update)
+        .then((result) => {
+          console.log('success: PLAYER DELETED');
+          console.log(result);
+          res.send(result);
+        }).catch((error) => {
+          console.log('error: PLAYER NOT DELETED');
+          res.status(500).json({ error });
+        });
+    } else {
+      console.log('INDEX NOT FOUND');
+    }
   } else {
     console.log(' Player not in the game');
     req.body.players_list.push(req.user); // add player to player_list
