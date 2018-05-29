@@ -6,13 +6,14 @@ const PostSchema = new Schema({
   date: String,
   time: String,
   duration: Number, // minutes
-  lat: Number,
-  long: Number,
+  location: [{ type: Schema.Types.ObjectId, ref: 'Court' }],
   players_needed: Number,
   max_players: Number,
   level: Number,
-  players_list: [{ type: String }], // players_list: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-  creator: { type: Schema.Types.ObjectId, ref: 'User' },
+  players_list: [{ type: Schema.Types.ObjectId, ref: 'User' }], // players_list: [{ type: String }],
+  players_status: [{ playerId: String, status: String }], // status -joined or evaluted
+  postGameEvaluation: [{ playerId: String, evaluations: { } }],
+  author: { type: Schema.Types.ObjectId, ref: 'User' },
 });
 
 // create PostModel class from schema

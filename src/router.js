@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import * as Posts from './controllers/post_controller';
 import * as UserController from './controllers/user_controller';
+import * as Courts from './controllers/court_controller';
 import { requireAuth, requireSignin } from './services/passport';
 
 const router = Router();
@@ -19,6 +20,11 @@ router.get('/', (req, res) => {
   res.json({ message: 'welcome to our blog api!' });
 });
 
+// // a player's joined games
+// router.route('/yourgames/')
+//   .get(requireAuth, UserController.getUserGames)
+//   .put(requireAuth, UserController.updateUserGames); // update a player's posts
+
 // your routes will go here
 // chaining method
 router.route('/posts/')
@@ -28,6 +34,30 @@ router.route('/posts/')
 router.route('/posts/:id')
   .get(Posts.getPost)
   .put(requireAuth, Posts.updatePost)
+  .put(requireAuth, Posts.updatePostGameEvaluation)
   .delete(requireAuth, Posts.deletePost);
+
+router.route('/postss/:id')
+  .put(requireAuth, Posts.updatePostGameEvaluation);
+
+// for going to a user profile
+router.route('/user/')
+  .get(requireAuth, UserController.getUser);
+
+router.route('/user/')
+  .put(requireAuth, UserController.addGame);
+// update game list
+// get user games
+
+// for ranking
+// router.route('/users/')
+//     .get(Posts.getPost)
+
+router.route('/courts/')
+  .get(Courts.getCourts)
+  .post(Courts.createCourt);
+
+router.route('/courts/:id')
+  .get(Courts.getCourt);
 
 export default router;
