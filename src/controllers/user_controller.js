@@ -132,9 +132,26 @@ export const addGame = (req, res) => {
   console.log(req.user);
   console.log(req.body);
 
-
-  if (req.user.games.indexOf(req.body.id) >= 0) {
-    return res.status(500).send('User has already this game');
+  if (req.user.games.filter((e) => { return e == req.body._id; }).length > 0) {
+  // if (req.user.games.indexOf(req.body._id) >= 0) {
+    console.log('User has already this game');
+    const index = req.user.games.findIndex((p) => { return p == req.body._id; });
+    if (index > -1) {
+      console.log('INDEX FOUND IN ADDGAME API');
+      req.user.games.splice(index, 1);
+      User.findOneAndUpdate(query, req.user)
+        .then((result) => {
+          console.log('success: Game DELETED');
+          console.log(result);
+          res.send(result);
+        }).catch((error) => {
+          console.log('failure: Game NOT DELETED');
+          console.log(error);
+          res.status(500).json({ error });
+        });
+    } else {
+      console.log('cannot find index');
+    }
   } else {
     console.log(' User not in game');
 
