@@ -35,6 +35,7 @@ export const getCourt = (req, res) => {
       console.log('success');
       console.log(result.body.lat);
       console.log(result.body.long);
+      console.log(result.body.game_list);
       res.send(result);
     }).catch((error) => {
       // console.log('error');
@@ -43,7 +44,9 @@ export const getCourt = (req, res) => {
     });
 };
 
+
 // // Add game to court
+
 export const addGameToCourt = (req, res) => {
   // console.log('req.params', req.body);
   const query = { _id: req.params.id };
