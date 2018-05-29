@@ -4,8 +4,10 @@ import Court from '../models/court_model';
 export const createCourt = (req, res) => {
   const court = new Court();
   court.title = req.body.title;
-  court.lat = req.body.lat;
-  court.long = req.body.long;
+  // court.lat = req.body.lat;
+  // court.long = req.body.long;
+  court.coordinate.lat = req.body.lat;
+  court.coordinate.long = req.body.long;
   court.game_list = req.body.game_list;
   court.save()
     .then((result) => {
