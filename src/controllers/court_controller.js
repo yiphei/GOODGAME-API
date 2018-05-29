@@ -20,7 +20,7 @@ export const createCourt = (req, res) => {
 };
 
 export const getCourts = (req, res) => {
-  Court.find()
+  Court.find().populate('game_list')
     .then((result) => {
       res.send(result);
     }).catch((error) => {
