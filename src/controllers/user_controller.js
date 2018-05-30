@@ -126,51 +126,96 @@ export const getUser = (req, res) => {
 };
 
 
+export const deleteGame = (req, res) => {
+  console.log('In DELETEGAME API');
+  console.log(req.user);
+  console.log(req.body);
+
+  const index = req.user.games.findIndex((p) => { return p == req.body._id; });
+  if (index > -1) {
+    console.log('INDEX FOUND IN ADDGAME API');
+    req.user.games.splice(index, 1);
+    User.findByIdAndUpdate(req.user._id, req.user, { new: true }).then((result) => {
+      console.log('success: Game DELETED');
+      console.log(result);
+      res.send(result);
+    }).catch((error) => {
+      console.log('failure: Game NOT DELETED');
+      console.log(error);
+      res.status(500).json({ error });
+    });
+  } else {
+    console.log('cannot find index');
+  }
+};
+
+
 export const addGame = (req, res) => {
-  // A.findOneAndUpdate(conditions, update)
-  // console.log('req.params', req.body);
-  const query = { _id: req.user._id };
   console.log('In AddGame API');
   console.log(req.user);
   console.log(req.body);
 
-  if (req.user.games.filter((e) => { return e == req.body._id; }).length > 0) {
-  // if (req.user.games.indexOf(req.body._id) >= 0) {
-    console.log('User has already this game');
-    const index = req.user.games.findIndex((p) => { return p == req.body._id; });
-    if (index > -1) {
-      console.log('INDEX FOUND IN ADDGAME API');
-      req.user.games.splice(index, 1);
-      User.findOneAndUpdate(query, req.user)
-        .then((result) => {
-          console.log('success: Game DELETED');
-          console.log(result);
-          res.send(result);
-        }).catch((error) => {
-          console.log('failure: Game NOT DELETED');
-          console.log(error);
-          res.status(500).json({ error });
-        });
-    } else {
-      console.log('cannot find index');
-    }
-  } else {
-    console.log(' User not in game');
-
-    // const update = req.user;
-    req.user.games.push(req.body);
-
-    // Object.assign({}, req.user, update);
-
-    User.findOneAndUpdate(query, req.user)
-      .then((result) => {
-        console.log('success');
-        console.log(result);
-        res.send(result);
-      }).catch((error) => {
-        console.log('Add game to user not successful');
-        console.log(error);
-        res.status(500).json({ error });
-      });
-  }
+  console.log(' User not in game');
+  req.user.games.push(req.body);
+  console.log('PUSHED ADDGAME');
+  console.log(req.user);
+  console.log('BEFORE DATABASE ADDGAME');
+  User.findByIdAndUpdate(req.user._id, req.user, { new: true }).then((result) => {
+    console.log('success: AddGame');
+    console.log(result);
+    res.send(result);
+  }).catch((error) => {
+    console.log('failure: AddGame ');
+    console.log(error);
+    res.status(500).json({ error });
+  });
 };
+
+// export const addGame = (req, res) => {
+//   // A.findOneAndUpdate(conditions, update)
+//   // console.log('req.params', req.body);
+//   const query = { _id: req.user._id };
+//   console.log('In AddGame API');
+//   console.log(req.user);
+//   console.log(req.body);
+//
+//   if (req.user.games.filter((e) => { return e == req.body._id; }).length > 0) {
+//   // if (req.user.games.indexOf(req.body._id) >= 0) {
+//     console.log('User has already this game');
+//     const index = req.user.games.findIndex((p) => { return p == req.body._id; });
+//     if (index > -1) {
+//       console.log('INDEX FOUND IN ADDGAME API');
+//       req.user.games.splice(index, 1);
+//       User.findOneAndUpdate(query, req.user)
+//         .then((result) => {
+//           console.log('success: Game DELETED');
+//           console.log(result);
+//           res.send(result);
+//         }).catch((error) => {
+//           console.log('failure: Game NOT DELETED');
+//           console.log(error);
+//           res.status(500).json({ error });
+//         });
+//     } else {
+//       console.log('cannot find index');
+//     }
+//   } else {
+//     console.log(' User not in game');
+//
+//     // const update = req.user;
+//     req.user.games.push(req.body);
+//
+//     // Object.assign({}, req.user, update);
+//
+//     User.findOneAndUpdate(query, req.user)
+//       .then((result) => {
+//         console.log('success: AddGame');
+//         console.log(result);
+//         res.send(result);
+//       }).catch((error) => {
+//         console.log('failure: AddGame ');
+//         console.log(error);
+//         res.status(500).json({ error });
+//       });
+//   }
+// };
