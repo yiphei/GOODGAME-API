@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import User from '../models/user_model';
 
 /* eslint-disable consistent-return */
+
 /* eslint-disable prefer-destructuring */
 
 dotenv.config({ silent: true });

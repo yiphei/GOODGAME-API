@@ -1,8 +1,8 @@
 // contains the main functionality for our API
 import Post from '../models/post_model';
+// import User from '../models/user_model';
+
 /* eslint-disable consistent-return */
-
-
 export const createPost = (req, res) => {
   const post = new Post();
   post.date = req.body.date;
@@ -22,13 +22,58 @@ export const createPost = (req, res) => {
   // console.log('createPost', req.body.title, ' ', req.body.tags, ' ', req.body.content, ' ', req.body.cover_url, '\n');
   post.save()
     .then((result) => {
-      res.json({ message: 'Post created!' });
+      res.send(result);
       // console.log(post);
     })
     .catch((error) => {
       res.status(500).json({ error });
     });
 };
+
+// export const createPost = (req, res) => {
+//   console.log('IN CREATEPOST API');
+//   const post = new Post();
+//   post.date = req.body.date;
+//   post.time = req.body.time;
+//   post.duration = req.body.duration;
+//   post.location = req.body.location;
+//   post.players_needed = req.body.players_needed;
+//   post.max_players = req.body.max_players;
+//   post.level = req.body.level; // this may change - level of creator
+//   post.players_list = new Array(req.user); // [req.user]; // req.user._id creator
+//   post.author = req.user; // req.user._id creator
+//
+//   post.players_status = new Array({ playerId: req.user._id, status: 'Joined' });
+//
+//   console.log(req.body);
+//   console.log(req.user);
+//   post.save()
+//     .then((result) => {
+//       console.log('SUCCESSS!!!');
+//       console.log(req.user);
+//       console.log(result);
+//       console.log(post);
+//       const query = { _id: req.user._id };
+//       console.log('BEFORE PUSH');
+//       req.user.games.push(result);
+//       console.log(req.user);
+//       console.log('AFTER PUSH');
+//       User.findOneAndUpdate(query, req.user)
+//         .then((result) => {
+//           console.log('GAME CREATED SUCCESSs');
+//           console.log(result);
+//           res.json({ message: 'Post created!' });
+//         }).catch((error) => {
+//           console.log('Add game to user not successful');
+//           console.log(error);
+//           res.status(500).json({ error });
+//         });
+//     })
+//     .catch((error) => {
+//       console.log('NOT SUCCESSS!!!');
+//       res.status(500).json({ error });
+//     });
+// };
 
 export const getPosts = (req, res) => {
   console.log('IN get POsts');
@@ -113,6 +158,27 @@ export const updatePost = (req, res) => {
         res.status(500).json({ error });
       });
   }
+};
+
+
+export const editPost = (req, res) => {
+  const query = { _id: req.params.id };
+  console.log('IN editPost API');
+  console.log(req.body);
+
+
+  const update = req.body;
+  // if user not in players_list, add player to the list
+  Post.findOneAndUpdate(query, update)
+    .then((result) => {
+      // console.log('success');
+      // console.log(result);
+      res.send(result);
+    }).catch((error) => {
+      // console.log('error');
+      // console.log(error);
+      res.status(500).json({ error });
+    });
 };
 
 

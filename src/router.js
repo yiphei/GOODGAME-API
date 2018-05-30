@@ -27,6 +27,10 @@ router.get('/', (req, res) => {
 
 // your routes will go here
 // chaining method
+
+router.route('/postssss/:id')
+  .put(requireAuth, Posts.editPost);
+
 router.route('/posts/')
   .post(requireAuth, Posts.createPost)
   .get(Posts.getPosts);
@@ -34,7 +38,6 @@ router.route('/posts/')
 router.route('/posts/:id')
   .get(Posts.getPost)
   .put(requireAuth, Posts.updatePost)
-  .put(requireAuth, Posts.updatePostGameEvaluation)
   .delete(requireAuth, Posts.deletePost);
 
 router.route('/postss/:id')
