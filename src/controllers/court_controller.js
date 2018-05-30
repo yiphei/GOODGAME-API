@@ -34,9 +34,7 @@ export const getCourt = (req, res) => {
   Court.findById(req.params.id).populate('game_list')
     .then((result) => {
       console.log('get court success');
-      console.log(result.body.lat);
-      console.log(result.body.long);
-      console.log(result.body.game_list);
+      console.log('getCourt result', result);
       res.send(result);
     }).catch((error) => {
       // console.log('error');
