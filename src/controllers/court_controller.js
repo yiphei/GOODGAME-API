@@ -21,7 +21,9 @@ export const createCourt = (req, res) => {
 
 export const getCourts = (req, res) => {
   Court.find() // .populate('game_list')
+    .populate({ game_list: 'game_list' })
     .then((result) => {
+      console.log('in getCourts ', result);
       res.send(result);
     }).catch((error) => {
       res.status(500).json({ error });
