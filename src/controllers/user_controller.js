@@ -46,6 +46,7 @@ export const signup = (req, res, next) => {
         user.email = email;
         user.password = password;
         user.handle = handle;
+
         user.games = [];
 
         // Save the new User object
