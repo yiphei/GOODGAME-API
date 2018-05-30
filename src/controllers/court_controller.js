@@ -55,22 +55,22 @@ export const addGameToCourt = (req, res) => {
   // if (req.body.game_list.includes(req.body.game)) {
   //   return res.status(500).send('Game is already in this court');
   // } else {
-    console.log(req.params);
-    console.log(req.body.game_list);
-    // req.body.game_list.push(req.params.game); // req.game
-    const update = req.body;
-    // if user not in players_list, add player to the list
-    Court.findOneAndUpdate(query, update)
-      .then((result) => {
-        // console.log('success');
-        // console.log(result);
-        res.send(result);
-      }).catch((error) => {
-        // console.log('error');
-        // console.log(error);
-        res.status(500).json({ error });
-      });
-  }
+  console.log(req.params);
+  console.log(req.body.game_list);
+  // req.body.game_list.push(req.params.game); // req.game
+  const update = req.body;
+  // if user not in players_list, add player to the list
+  Court.findOneAndUpdate(query, update)
+    .then((result) => {
+      // console.log('success');
+      // console.log(result);
+      res.send(result);
+    }).catch((error) => {
+      // console.log('error');
+      // console.log(error);
+      res.status(500).json({ error });
+    });
+  // }
 };
 //
 // export const removeGamefromCourt = (req, res) => {
