@@ -30,9 +30,10 @@ export const getCourts = (req, res) => {
 
 export const getCourt = (req, res) => {
   // console.log(req.params.id);
+  console.log('in getcourt');
   Court.findById(req.params.id).populate('game_list')
     .then((result) => {
-      console.log('success');
+      console.log('get court success');
       console.log(result.body.lat);
       console.log(result.body.long);
       console.log(result.body.game_list);
