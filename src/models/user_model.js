@@ -8,6 +8,7 @@ const UserSchema = new Schema({
   password: { type: String },
   handle: { type: String }, //   handle: { type: String, unique: true, lowercase: true },
   games: [{ type: Schema.Types.ObjectId, ref: 'Post' }], // games and status
+  score: Number,
 });
 
 // provides a mapping to id from _id,
