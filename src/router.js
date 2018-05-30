@@ -64,6 +64,7 @@ router.route('/courts/')
   .post(Courts.createCourt);
 
 router.route('/courts/:id')
-  .get(Courts.getCourt);
+  .get(Courts.getCourt)
+  .put(Courts.addGameToCourt);
 
 export default router;

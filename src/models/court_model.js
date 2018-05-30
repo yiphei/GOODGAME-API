@@ -7,8 +7,6 @@ const CourtSchema = new Schema({
     lat: Number,
     long: Number,
   },
-  // lat: Number,
-  // long: Number,
   game_list: [{ type: Schema.Types.ObjectId, ref: 'Court' }], // players_list: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 });
 
