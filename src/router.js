@@ -47,8 +47,11 @@ router.route('/postss/:id')
 router.route('/user/')
   .get(requireAuth, UserController.getUser);
 
-router.route('/user/')
+router.route('/user/addgame')
   .put(requireAuth, UserController.addGame);
+
+router.route('/user/delgame')
+  .put(requireAuth, UserController.deleteGame);
 // update game list
 // get user games
 

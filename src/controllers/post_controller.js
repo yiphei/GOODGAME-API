@@ -119,6 +119,7 @@ export const deletePost = (req, res) => {
 export const updatePost = (req, res) => {
   const query = { _id: req.params.id };
   console.log('IN UPDATEPOST API');
+  console.log(req.params.id);
   console.log(req.body);
   console.log(req.user);
 
@@ -129,34 +130,39 @@ export const updatePost = (req, res) => {
     const index = req.body.players_list.findIndex((p) => { return p.id == req.user._id; });
     if (index > -1) {
       req.body.players_list.splice(index, 1);
-      const update = req.body;
-      Post.findOneAndUpdate(query, update)
-        .then((result) => {
-          console.log('success: PLAYER DELETED');
-          console.log(result);
-          res.send(result);
-        }).catch((error) => {
-          console.log('error: PLAYER NOT DELETED');
-          res.status(500).json({ error });
-        });
+      console.log('after SPLICING');
+      console.log(req.body);
+      Post.findByIdAndUpdate(req.params.id, req.body, { new: true }).then((result) => {
+        console.log('success: PLAYER DELETED');
+        console.log(result);
+        res.send(result);
+      }).catch((error) => {
+        console.log('error: PLAYER NOT DELETED');
+        res.status(500).json({ error });
+      });
     } else {
       console.log('INDEX NOT FOUND');
     }
   } else {
     console.log(' Player not in the game');
     req.body.players_list.push(req.user); // add player to player_list
-    const update = req.body;
+    // const update = req.body;
     // if user not in players_list, add player to the list
-    Post.findOneAndUpdate(query, update)
-      .then((result) => {
-        // console.log('success');
-        // console.log(result);
-        res.send(result);
-      }).catch((error) => {
-        // console.log('error');
-        // console.log(error);
-        res.status(500).json({ error });
-      });
+
+    console.log('PUSHED ADDGAME');
+    console.log(req.body);
+    console.log('BEFORE DATABASE ADDGAME');
+
+
+    Post.findByIdAndUpdate(req.params.id, req.body, { new: true }).then((result) => {
+      console.log('success:UPDATEPOST ');
+      console.log(result);
+      res.send(result);
+    }).catch((error) => {
+      console.log('failure:UPDATEPOST ');
+      console.log(error);
+      res.status(500).json({ error });
+    });
   }
 };
 
