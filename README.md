@@ -13,11 +13,11 @@ Deployed at https://good-game.herokuapp.com/api/
 * Fetch courts
   * GET /api/courts/ returns all courts [{'_id','title', 'coordinate', 'game_list'},...]
 * Create a court
- * POST /api/courts/ with post parameters {'date', 'time', 'duration', 'location', 'players_needed', 'max_players', 'level'} creates a new court. The 'players_list' field automatically includes the user who created the game and adds players as they join the game. The 'author' field is automatically saved as the user who created the game.
+  * POST /api/courts/ with post parameters {'date', 'time', 'duration', 'location', 'players_needed', 'max_players', 'level'} creates a new court. The 'players_list' field automatically includes the user who created the game and adds players as they join the game. The 'author' field is automatically saved as the user who created the game.
 * Add game to a court
- * PUT /api/courts/:postID adds a game to a court. This is used when user creates a game and chooses an existing court for the game to take place at.
+  * PUT /api/courts/:postID adds a game to a court. This is used when user creates a game and chooses an existing court for the game to take place at.
 * Get a court 
- * GET /api/courts/:postID will get a specific court
+  * GET /api/courts/:postID will get a specific court
 
 ### Games (posts)
 * Fetch games
