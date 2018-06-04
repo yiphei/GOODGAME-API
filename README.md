@@ -11,7 +11,7 @@ Deployed at https://good-game.herokuapp.com/api/
 ### Courts
 
 * Fetch courts
- * GET /api/courts/ returns all courts [{'_id','title', 'coordinate', 'game_list'},...]
+  * GET /api/courts/ returns all courts [{'_id','title', 'coordinate', 'game_list'},...]
 * Create a court
  * POST /api/courts/ with post parameters {'date', 'time', 'duration', 'location', 'players_needed', 'max_players', 'level'} creates a new court. The 'players_list' field automatically includes the user who created the game and adds players as they join the game. The 'author' field is automatically saved as the user who created the game.
 * Add game to a court
