@@ -28,13 +28,12 @@ Deployed at https://good-game.herokuapp.com/api/
   * GET /api/posts/:postID returns the game found at postID
 * Delete a game
   * DELETE /api/posts/:postID deletes the game found at postID
-
+* Update a game
+  * PUT /api/postssss/:id 
+  * PUT /api/posts/:id
 * update Post Game Evaluation
   * PUT api/postss/:id updatePostGameEvaluation
-* Edit a game
-  * PUT /api/posts/:postID with parameters {'title', 'tags', 'content'} will update an entry
-router.route('/postssss/:id')
-  .put(requireAuth, Posts.editPost);
+
 
 ### Users
 * Sign in
