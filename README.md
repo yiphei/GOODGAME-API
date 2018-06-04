@@ -21,32 +21,32 @@ Deployed at https://good-game.herokuapp.com/api/
 
 ### Games (posts)
 * Fetch games
- * GET /api/posts/ returns all games [{'_id','players_list','date', 'time','duration','players_needed', 'max_players','level', 'author'},...]
+  * GET /api/posts/ returns all games [{'_id','players_list','date', 'time','duration','players_needed', 'max_players','level', 'author'},...]
 * Create new game 
- * POST /api/posts/ with post parameters {'date', 'time', 'duration', 'location', 'players_needed', 'max_players', 'level'} creates a new post. The 'players_list' field automatically includes the user who created the game and adds players as they join the game. The 'author' field is automatically saved as the user who created the game.
+  * POST /api/posts/ with post parameters {'date', 'time', 'duration', 'location', 'players_needed', 'max_players', 'level'} creates a new post. The 'players_list' field automatically includes the user who created the game and adds players as they join the game. The 'author' field is automatically saved as the user who created the game.
 * Get a game
- * GET /api/posts/:postID returns the game found at postID
+  * GET /api/posts/:postID returns the game found at postID
 * Delete a game
- * DELETE /api/posts/:postID deletes the game found at postID
+  * DELETE /api/posts/:postID deletes the game found at postID
 
 * update Post Game Evaluation
- * PUT api/postss/:id updatePostGameEvaluation
+  * PUT api/postss/:id updatePostGameEvaluation
 * Edit a game
- * PUT /api/posts/:postID with parameters {'title', 'tags', 'content'} will update an entry
+  * PUT /api/posts/:postID with parameters {'title', 'tags', 'content'} will update an entry
 router.route('/postssss/:id')
   .put(requireAuth, Posts.editPost);
 
 ### Users
 * Sign in
- * POST /api/signin 
+  * POST /api/signin 
 * Sign up 
- * POST /api/signup
+  * POST /api/signup
 * Get user profile
- * GET /api/user 
+  * GET /api/user 
 * Add user to game (join game)
- * PUT /user/addgame
+  * PUT /user/addgame
 * Remove user from game (leave game)
- * PUT /user/delgame
+  * PUT /user/delgame
 
 ## starter express app template
 
