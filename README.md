@@ -1,4 +1,10 @@
-# Lab5 part 1
+# CS52 Team: Junfei Yu, Savannah Liu, Alexander Bailey, Lessley Hernandez, Yi Fei Yan, Ally Mahmoud
+# Good Game - README
+&nbsp;
+
+# Introduction
+This is an App made for pick-up basketball lovers at Dartmouth College and around the world to help them find available courts and people who they want to play with, the games which match the most to their expectations and gamify their games.
+We implemented create/join/edit/delete a game, map view, and the post-game evaluation.
 
 
 ## Description
